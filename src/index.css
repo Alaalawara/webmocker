@@ -1,0 +1,173 @@
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@import "tailwindcss/preflight";
+@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter",system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  --white: rgba(255, 255, 255, 0.87);
+  --background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --radius: 0.625rem;
+  --foreground: #3E6DD9;
+  --primary: #070707;
+  --close:#F3605C;
+  --minimize:#F8BE39;
+  --maximize:#50C845;
+  --b-white:#ffffff;
+  --b-grey:#626262;
+  --b-dark:#000000;
+  --b-neon:oklch(80.9% 0.105 251.813);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+    *,
+    *::before,
+    *::after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    /* For Firefox. */
+    * {
+        scrollbar-width: none;
+    }
+
+    /* For WebKit (Chrome & Safari). */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+h1{
+  font-size: 3rem;
+  font-weight: bold;
+  color:var(--foreground);
+}
+
+h2 {
+  font-size: 2.75rem;
+  font-weight: bold;
+  color:var(--foreground);
+}
+
+h3 {
+  font-size: 2.5rem;
+ font-weight: bold;
+ color:var(--foreground);
+}
+
+h4 {
+  font-size: 2rem;
+ font-weight: bold;
+ color:var(--foreground);
+}
+
+p {
+  font-size: 1.25rem;
+ font-weight: bold;
+  text-decoration: none;
+  color:var(--foreground);
+}
+
+/* From Uiverse.io by Voxybuns */ 
+button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+}
+
+.button_under {
+ background-color: var(--foreground);
+}
+
+.button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--foreground);
+  border-radius: var(--button_radius);
+  padding: 0.2em 1em;
+  background: var(--button_color);
+  color: var(--background-color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
