@@ -1,20 +1,17 @@
-import { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { UserContext } from './context/UserContext';
-import toast from 'react-hot-toast';
+// src/ProtectedRoute.jsx
+import { useContext, useEffect } from 'react'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { UserContext } from './context/UserContext'
 
-function ProtectedRoute() {
-  const { user } = useContext(UserContext);
+export default function ProtectedRoute() {
+  const { user, loading, refreshUser } = useContext(UserContext)
+  const location = useLocation()
 
-  if (user === undefined) {
-    return null;
-  }
+  useEffect(() => {
+    if (!user) refreshUser()
+  }, []) // eslint-disable-line
 
-  if (!user) {
-    toast.error('Please log in to access this page.');
-    return <Navigate to="/login" replace />;
-  }
-  return <Outlet />;
+  if (loading) return <div className="p-8">Loading…</div>
+  if (!user) return <Navigate to="/login" state={{ from: location }} replace />
+  return <Outlet />
 }
-
-export default ProtectedRoute;

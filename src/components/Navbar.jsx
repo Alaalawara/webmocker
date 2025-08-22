@@ -1,11 +1,14 @@
 import { useEffect, useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import profile from '../assets/profile.png'
 
 export default function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef(null); 
+  const fallback = profile;
+  const [src, setSrc] = useState(fallback);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +26,15 @@ export default function Navbar() {
     setUser(null);
     navigate('/login');
   };
+
+   useEffect(() => {
+    try {
+      const stored = localStorage.getItem("photo");
+      setSrc(stored || fallback);
+    } catch {
+      setSrc(fallback);
+    }
+  }, []);
 
   return (
     <nav className="px-15 py-2 flex justify-between items-center bg-black/30 backdrop-blur-sm relative z-50">
@@ -73,10 +85,11 @@ export default function Navbar() {
             <>
               {/* Profile Picture */}
               <img
-                src={user.image}
-                alt="img"
+                src={src}   // backend sends `photo`, not `image`
+                alt="profile"
                 className="w-10 h-10 rounded-full border-4 border-foreground cursor-pointer"
                 onClick={() => setDropdownOpen((prev) => !prev)}
+                onError={() => setSrc(fallback)}
               />
 
               {/* Dropdown */}
